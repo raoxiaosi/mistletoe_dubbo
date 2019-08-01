@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rao.java.dao.user.MstMemberDao">
+  
+  <resultMap id="BaseResultMap" type="bean.user.MstMember">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="member_no" jdbcType="VARCHAR" property="memberNo" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="gender" jdbcType="TINYINT" property="gender" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="use_status" jdbcType="TINYINT" property="useStatus" />
+    <result column="delete_status" jdbcType="TINYINT" property="deleteStatus" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="member_login_num" jdbcType="INTEGER" property="memberLoginNum" />
+    <result column="member_login_ip" jdbcType="VARCHAR" property="memberLoginIp" />
+    <result column="member_old_login_ip" jdbcType="VARCHAR" property="memberOldLoginIp" />
+    <result column="member_login_time" jdbcType="INTEGER" property="memberLoginTime" />
+    <result column="member_old_login_time" jdbcType="INTEGER" property="memberOldLoginTime" />
+    <result column="birthday" jdbcType="INTEGER" property="birthday" />
+    <result column="create_time" jdbcType="INTEGER" property="createTime" />
+    <result column="update_time" jdbcType="INTEGER" property="updateTime" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, member_no, nick_name, gender, phone, avatar, password, use_status, delete_status, 
+    remark, member_login_num, member_login_ip, member_old_login_ip, member_login_time, 
+    member_old_login_time, birthday, create_time, update_time
+  </sql>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mst_member
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mst_member
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="bean.user.MstMember">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into mst_member (id, member_no, nick_name, 
+      gender, phone, avatar, 
+      password, use_status, delete_status, 
+      remark, member_login_num, member_login_ip, 
+      member_old_login_ip, member_login_time, member_old_login_time, 
+      birthday, create_time, update_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{memberNo,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=TINYINT}, #{phone,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{useStatus,jdbcType=TINYINT}, #{deleteStatus,jdbcType=TINYINT}, 
+      #{remark,jdbcType=VARCHAR}, #{memberLoginNum,jdbcType=INTEGER}, #{memberLoginIp,jdbcType=VARCHAR}, 
+      #{memberOldLoginIp,jdbcType=VARCHAR}, #{memberLoginTime,jdbcType=INTEGER}, #{memberOldLoginTime,jdbcType=INTEGER}, 
+      #{birthday,jdbcType=INTEGER}, #{createTime,jdbcType=INTEGER}, #{updateTime,jdbcType=INTEGER}
+      )
+  </insert>
+  
+  <insert id="insertSelective" parameterType="bean.user.MstMember">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into mst_member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      id,
+      <if test="memberNo != null">
+        member_no,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="useStatus != null">
+        use_status,
+      </if>
+      <if test="deleteStatus != null">
+        delete_status,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="memberLoginNum != null">
+        member_login_num,
+      </if>
+      <if test="memberLoginIp != null">
+        member_login_ip,
+      </if>
+      <if test="memberOldLoginIp != null">
+        member_old_login_ip,
+      </if>
+      <if test="memberLoginTime != null">
+        member_login_time,
+      </if>
+      <if test="memberOldLoginTime != null">
+        member_old_login_time,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{id,jdbcType=INTEGER},
+      <if test="memberNo != null">
+        #{memberNo,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=TINYINT},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="useStatus != null">
+        #{useStatus,jdbcType=TINYINT},
+      </if>
+      <if test="deleteStatus != null">
+        #{deleteStatus,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="memberLoginNum != null">
+        #{memberLoginNum,jdbcType=INTEGER},
+      </if>
+      <if test="memberLoginIp != null">
+        #{memberLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="memberOldLoginIp != null">
+        #{memberOldLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="memberLoginTime != null">
+        #{memberLoginTime,jdbcType=INTEGER},
+      </if>
+      <if test="memberOldLoginTime != null">
+        #{memberOldLoginTime,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="bean.user.MstMember">
+    update mst_member
+    <set>
+      <if test="memberNo != null">
+        member_no = #{memberNo,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=TINYINT},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="useStatus != null">
+        use_status = #{useStatus,jdbcType=TINYINT},
+      </if>
+      <if test="deleteStatus != null">
+        delete_status = #{deleteStatus,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="memberLoginNum != null">
+        member_login_num = #{memberLoginNum,jdbcType=INTEGER},
+      </if>
+      <if test="memberLoginIp != null">
+        member_login_ip = #{memberLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="memberOldLoginIp != null">
+        member_old_login_ip = #{memberOldLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="memberLoginTime != null">
+        member_login_time = #{memberLoginTime,jdbcType=INTEGER},
+      </if>
+      <if test="memberOldLoginTime != null">
+        member_old_login_time = #{memberOldLoginTime,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="bean.user.MstMember">
+    update mst_member
+    set member_no = #{memberNo,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=TINYINT},
+      phone = #{phone,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      use_status = #{useStatus,jdbcType=TINYINT},
+      delete_status = #{deleteStatus,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      member_login_num = #{memberLoginNum,jdbcType=INTEGER},
+      member_login_ip = #{memberLoginIp,jdbcType=VARCHAR},
+      member_old_login_ip = #{memberOldLoginIp,jdbcType=VARCHAR},
+      member_login_time = #{memberLoginTime,jdbcType=INTEGER},
+      member_old_login_time = #{memberOldLoginTime,jdbcType=INTEGER},
+      birthday = #{birthday,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="listAllUser" resultType="bean.user.MstMember">
+    select
+    <include refid="Base_Column_List" />
+    from mst_member
+  </select>
+
+</mapper>
